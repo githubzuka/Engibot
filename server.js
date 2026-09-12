@@ -303,7 +303,7 @@ async function serveStatic(request, response) {
   }
 }
 
-const server = http.createServer((request, response) => {
+export function requestHandler(request, response) {
   if (request.method === 'POST' && (request.url === '/api/auth/register' || request.url === '/api/auth/login')) return handleAuth(request, response);
   if (request.method === 'GET' && request.url === '/api/auth/me') return handleMe(request, response);
   if (request.method === 'POST' && request.url === '/api/chat') return handleChat(request, response);
@@ -317,17 +317,20 @@ const server = http.createServer((request, response) => {
   }
   if (request.method === 'GET') return serveStatic(request, response);
   return sendJson(response, 405, { error: 'Method not allowed.' });
-});
+}
 
-server.on('error', (error) => {
-  if (error.code === 'EADDRINUSE') {
-    console.error(`Port ${port} is already in use. Stop the existing server or set another PORT in .env.`);
-    process.exitCode = 1;
-    return;
-  }
-  throw error;
-});
+if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
+  const server = http.createServer(requestHandler);
+  server.on('error', (error) => {
+    if (error.code === 'EADDRINUSE') {
+      console.error(`Port ${port} is already in use. Stop the existing server or set another PORT in .env.`);
+      process.exitCode = 1;
+      return;
+    }
+    throw error;
+  });
 
-server.listen(port, () => {
-  console.log(`Engibot is running at http://localhost:${port}`);
-});
+  server.listen(port, () => {
+    console.log(`Engibot is running at http://localhost:${port}`);
+  });
+}
