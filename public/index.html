@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b1117">
+  <title>Engibot | AI workspace</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-mark icon-spark" aria-hidden="true"></span><span>Engibot</span></div>
+      <button class="new-chat" id="newChatButton"><span class="icon-plus" aria-hidden="true"></span> New conversation</button>
+      <div class="sidebar-label">Your space</div>
+      <div class="saved-note"><span class="note-dot"></span><span>Current conversation</span></div>
+      <div class="sidebar-bottom">
+        <div class="status"><span class="status-dot"></span><span>AI engine ready</span></div>
+        <div class="privacy-note">Your key stays on this server.<br>Conversations live in this tab.</div>
+      </div>
+    </aside>
+
+    <main class="chat-area">
+      <header class="topbar">
+        <div class="mobile-brand"><span class="brand-mark icon-spark" aria-hidden="true"></span> Engibot</div>
+        <div class="account-controls"><span class="profile-name" id="profileName"></span><button class="profile-button" id="profileButton" aria-label="Account profile" title="Account profile"><span class="icon-user" aria-hidden="true"></span></button></div>
+      </header>
+
+      <section class="conversation" id="conversation">
+        <div class="welcome" id="welcome">
+          <div class="welcome-orb icon-spark" aria-hidden="true"></div>
+          <p class="eyebrow">A clear space to think</p>
+          <h1>What are we<br><em>making</em> today?</h1>
+          <p class="welcome-copy">Ask a question, explore an idea, or bring a messy problem. I’m here to help you shape it.</p>
+          <div class="prompt-grid">
+            <button class="prompt-card" data-prompt="Help me turn a rough idea into a clear plan."><span class="card-icon icon-arrow" aria-hidden="true"></span><strong>Shape an idea</strong><small>Turn a rough thought into a plan</small></button>
+            <button class="prompt-card" data-prompt="Explain this concept to me simply, with a useful example."><span class="card-icon icon-ring" aria-hidden="true"></span><strong>Learn something</strong><small>Get a clear, useful explanation</small></button>
+            <button class="prompt-card" data-prompt="Help me write a concise, thoughtful message about this: "><span class="card-icon icon-wave" aria-hidden="true"></span><strong>Find the words</strong><small>Write with more clarity and care</small></button>
+          </div>
+        </div>
+      </section>
+
+      <div class="composer-wrap">
+        <div class="composer" id="composer">
+          <input id="fileInput" type="file" accept="image/*,.pdf,.docx,.txt,.md,.csv,.json,.xlsx,.xlsm,.xml,.html,.log" hidden>
+          <textarea id="messageInput" rows="1" placeholder="Message Engibot..." aria-label="Message Engibot"></textarea>
+          <button class="attach-button" id="attachButton" aria-label="Attach a file" title="Attach a file"><span class="icon-plus" aria-hidden="true"></span></button>
+          <button class="send-button" id="sendButton" aria-label="Send message" title="Send message"><span class="icon-send" aria-hidden="true"></span></button>
+        </div>
+        <div class="attachment-name" id="attachmentName" aria-live="polite"></div>
+        <div class="composer-footer"><span>Enter to send · Shift + Enter for a new line</span><button id="clearButton">Clear chat</button></div>
+      </div>
+    </main>
+  </div>
+  <div class="auth-screen" id="authScreen">
+    <div class="auth-panel">
+      <div class="auth-mark icon-spark" aria-hidden="true"></div>
+      <p class="eyebrow">Welcome to Engibot</p>
+      <h2 id="authTitle">Create your account</h2>
+      <p class="auth-copy">Sign in first so your conversations and profile stay connected to you.</p>
+      <form id="authForm">
+        <label id="nameField">Name<input id="authName" autocomplete="name" required></label>
+        <label>Email<input id="authEmail" type="email" autocomplete="email" required></label>
+        <label>Password<input id="authPassword" type="password" minlength="8" autocomplete="current-password" required></label>
+        <button class="auth-submit" type="submit" id="authSubmit">Create account</button>
+      </form>
+      <p class="auth-error" id="authError" role="alert"></p>
+      <button class="auth-switch" id="authSwitch" type="button">Already have an account? Log in</button>
+    </div>
+  </div>
+  <script src="/app.js" type="module"></script>
+</body>
+</html>
